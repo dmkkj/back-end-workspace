@@ -27,12 +27,22 @@ WHERE price BETWEEN 2 AND 4
     AND actors LIKE '%BOB%';
 
 -- 5. address 테이블에서 district가 비어있지 않고 앞에 숫자 제외 주소만 10개 조회
-SELECT address, district " "
+-- 정규표현식 못 쓰나 /^[0-9]$/
+SELECT address, substr(address, 1, 4), trim(district)
 FROM address
-WHERE district IS NOT NULL
-AND substr(address, 1, instr(address, '0123456789') + 1)
+ORDER BY district, address DESC
 LIMIT 0, 10;
 
+SELECT address, lpad(address, 20, '*')
+from address;
+
+select char_length(address)
+FROM address;
+
+SELECT address, substr(address, 1, 4), trim(district)
+FROM address;
+-- SELECT address, substr(address, 4, instr(address, '0123456789')), trim(district)
+-- substr(address, 1, instr(address, '0123456789') + 1)
 -- replace(address, 0123456789, '')
 
 -- 6. customer_list 테이블에서 id가 6인 사람부터 10명 조회
@@ -49,8 +59,10 @@ WHERE concat(first_name, last_name) LIKE 'J%'
 ORDER BY 2 DESC, last_name desc;
 
 -- 8. film 테이블에서 description에서 of 이전 문장만 중복 없이 10개만 추출해서 조회
-SELECT replace (description, 'of', '')
-FROM film;
+SELECT DISTINCT substr(description, 1, instr(description, 'of') - 1) "of 이전 문장"
+FROM film
+ORDER BY 1 DESC
+LIMIT 10;
 
 -- 9. film 테이블에서 replacement_cost 최소 비용과 최대 비용 조회
 SELECT MIN(replacement_cost) "최소 비용", MAX(replacement_cost) "최대 비용"
