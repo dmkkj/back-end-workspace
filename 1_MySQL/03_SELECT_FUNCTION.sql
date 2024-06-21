@@ -125,7 +125,7 @@ SELECT emp_name, rpad(substr(emp_no, 1, 8), char_length(emp_no), "*")
 FROM employee;
 
 -- concat 해설
-SELECT emp_name, 
+SELECT emp_name, concat(substr(emp_no, 1, 8), "******")
 FROM employee;
 
 -- replace(emp_no, substr(emp_no, 9, 14), '*') 
@@ -347,8 +347,10 @@ ORDER BY 2, 4 DESC;
 /*
 	CASE WHEN 조건식 1 THEN 결과값 1
 		 WHEN 조건식 2 THEN 결과값 2
-         ELSE
+         ....
+         ELSE 결과값 N
 	END
+    
     -> if ~ else if ~ else 문과 유사
 */
 SELECT 
