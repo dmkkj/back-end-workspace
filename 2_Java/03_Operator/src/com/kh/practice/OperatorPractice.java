@@ -33,6 +33,18 @@ public class OperatorPractice {
 		System.out.println("1인당 연필 개수 : " + div + "개");
 		System.out.println("남은 연필 개수 : " + mod + "개");
 		
+		
+		
+		/* 풀이
+		System.out.print("인원 수 : ");
+		int person = sc.nextInt();
+		
+		System.out.print("연필 개수 : ");
+		int pencil = sc.nextInt();
+		
+		System.out.println("1인당 연필 개수 : " + (pencil / person));
+		System.out.println("남은 연필 개수 : " + (pencil % person));
+		*/
 	}
 	
 	//입력 받은 숫자를 산술 연산자만 사용해서 십의 자리 이하는 버리는 코드를 작성하세요.
@@ -45,6 +57,15 @@ public class OperatorPractice {
 		int result = num - (num % 100);
 		System.out.print(result);
 		
+		
+		
+		/* 풀이 
+		System.out.print("숫자 입력 (100의 자리 이상) : ");
+		int num = sc.nextInt();
+		
+		System.out.println(num - num % 100);
+		System.out.println(num / 100 * 100);
+		*/
 	}
 
 	//3개의 수를 입력 받아 입력 받은 수가 모두 같으면 true, 아니면 false를 출력하세요.
@@ -60,6 +81,21 @@ public class OperatorPractice {
 		boolean check = (num1 == num2 && num2 == num3);
 		System.out.println(check);
 		
+		
+		
+		/* 풀이 
+		System.out.print("첫번째 수 : ");
+		int num1 = sc.nextInt();
+		
+		System.out.print("두번째 수 : ");
+		int num2 = sc.nextInt();
+		
+		System.out.print("세번째 수 : ");
+		int num3 = sc.nextInt();
+		
+		boolean result = num1 == num2 && num2 == num3;
+		System.out.println(result);
+		*/
 	}
 
 	//입력 받은 하나의 정수가 짝수이면 "짝수다", 짝수가 아니면 "짝수가 아니다"를 출력하세요.
@@ -71,6 +107,15 @@ public class OperatorPractice {
 		String result = num % 2 == 0 ? "짝수" : "짝수가 아니다";
 		System.out.println(result);
 		
+		
+		
+		/* 풀이 
+		System.out.print("정수 : ");
+		int num = sc.nextInt();
+		
+		String str = num % 2 == 0 ? "짝수" : "짝수가 아니다";
+		System.out.println(str);
+		*/
 	}
 
 	//주민번호(-포함)를 입력받아 남자인지 여자인지 구분하여 출력하세요
@@ -82,34 +127,62 @@ public class OperatorPractice {
 		
 		String gender = (pno == '1' || pno == '3') ? "남자" : (pno == '2' || pno == '4') ? "여자" : "뒷자리를 다시 확인해 주세요.";
 		System.out.println(gender);
-
+		
+		
+		
+		/* 풀이 
+		System.out.print("주민등록번호(-포함) : ");
+		char no = sc.nextLine().charAt(7);
+		System.out.println(no == '1' || no == '3' ? "남자" : "여자");
+		*/
 	}
 
 	//나이를 입력 받아 어린이(13세 이하)인지, 청소년(13세 초과 ~ 19세 이하)인지, 성인(19세 초과)인지 출력하세요.
 	public void method6() {
 	
-		System.out.print("나이 : ");
+//		System.out.print("나이 : ");
+//		int age = sc.nextInt();
+//		
+//		String result = (age <= 13) ? "어린이" : (13 < age && age <= 19) ? "청소년" : "성인";
+//		System.out.println(result);
+		
+		
+		
+		/* 풀이 */
+		System.out.print("나이 입력 : ");
 		int age = sc.nextInt();
 		
-		String result = (age <= 13) ? "어린이" : (13 < age && age <= 19) ? "청소년" : "성인";
-		System.out.println(result);
-		
+		String str = age <= 13 ? "어린이" : age <= 19 ? "청소년" : "성인";
+		System.out.println(str);
 	}
 
 	//사과의 개수와 바구니의 크기(바구니 1개에 들어가는 사과의 개수)를 입력받아
 	//필요한 바구니의 수를 출력하세요
 	public void method7() {
 		
+		/* */
+//		System.out.print("사과의 개수 : ");
+//		int apple = sc.nextInt();
+//		
+//		System.out.print("바구니의 크기 : ");
+//		int size = sc.nextInt();
+//		
+//		int count = (apple / size) + (apple % size)/size;
+//		int need = apple % size;
+//		System.out.println("필요한 바구니의 수 : " + count);
+//		System.out.println("남는 사과 : " + need);
+		
+		
+		
+		/* 풀이 */
 		System.out.print("사과의 개수 : ");
 		int apple = sc.nextInt();
-		System.out.print("바구니의 크기 : ");
-		int size = sc.nextInt();
 		
-		int count = apple / size;
-		int need = apple % size;
-		System.out.println("필요한 바구니의 수 : " + count);
-		System.out.println("남는 사과 : " + need);
+		System.out.print("바구니 1개당 들어가는 사과의 개수 : ");
+		int count = sc.nextInt();
 		
+		System.out.println(apple / count + (apple % count == 0 ? 0 : 1));
+		// System.out.println(apple % count == 0 ? apple / count : apple / count + 1);
 	}
 	
 }
