@@ -101,7 +101,7 @@ FROM employee;
     - SELECT 절에 리터럴을 사용하면 테이블에 존재하는 데이터처럼 조회가 가능
 */
 
--- employee 테이블에서 사번(emp_id), 직원명(emp_name), 급여(salary), 단위(원)조회
+-- employee 테이블에서 사번(emp_id), 직원명(emp_name), 급여(salary), 단위(원)조회qwe
 SELECT emp_id, emp_name, salary, '원'
 FROM employee;
 

@@ -111,14 +111,16 @@ class LoopPractice {
     	int random = (int) (Math.random() * 10);
     	System.out.println(random);
     
+    	
     	int num = 0;
-    	int count = 0;
+
     	while(random != num) {
-    		System.out.println(random);
-    		count++;
+    		
+
     	if(random == 0) break;
+    	} System.out.println(random);
     	}
-    }
+    
     
 //    public void method2() {
 //		while(true) {
