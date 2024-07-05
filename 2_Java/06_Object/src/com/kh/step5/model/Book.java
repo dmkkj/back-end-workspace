@@ -45,8 +45,6 @@ public class Book {
 	}
 
 	
-	
-	
 	public int getPrice() {
 		return price;
 	}
