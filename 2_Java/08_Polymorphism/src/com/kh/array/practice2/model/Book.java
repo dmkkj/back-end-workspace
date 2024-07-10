@@ -14,14 +14,12 @@ public class Book {
 
 
 
-
+/*
 package com.kh.step5.model;
 
 public class Book {
 	
-	/*
 
-	 * */
 	private String title;
 	private int price;
 	private double discountRate;
@@ -36,7 +34,7 @@ public class Book {
 //		this.author = author;
 //	}
 	
-	/* Alt + Shift + S로 자동으로 생성자 만들기 */
+
 	public Book() { // Alt + Shift + S >> Generate Constructors from SupperClass...
 	}
 	
@@ -91,5 +89,8 @@ public class Book {
 //	public String toString() {
 //		return "Book - title : " + title + ", price : " + price + " , discountRate : " + discountRate + ", author : " + author;
 //	}
+
 	
+
 }
+*/
