@@ -70,7 +70,7 @@ public class B_Aggregate {
 		
 		// 1 X 2 X 3 X 4 X 5 X 6
 		int result = Arrays.stream(values)
-				.reduce((x, y) -> x * y);
+				.reduce((x, y) -> x * y).getAsInt();
 		System.out.println(result);
 	}
 		
