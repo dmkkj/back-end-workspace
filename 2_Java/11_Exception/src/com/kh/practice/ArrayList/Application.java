@@ -3,8 +3,9 @@ package com.kh.practice.ArrayList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.kh.practice.ArrayList.controller.MusicController;
 import com.kh.practice.ArrayList.model.Music;
-import com.kh.practice.model.Book;
+
 
 public class Application {
 	
@@ -12,6 +13,7 @@ public class Application {
 	
 	public static void main(String[] args) {
 
+		MusicController mc = new MusicController();
 		ArrayList<Music> music = new ArrayList<>();
 		
 		{
@@ -41,6 +43,8 @@ public class Application {
         System.out.println("9. 종료");
         System.out.print("메뉴 번호 입력 : ");
 //      int menuNum = Integer.parseInt(sc.nextLine());
+        
+        mc.addMember(name, age);
         
         switch(Integer.parseInt(sc.nextLine())) {
 		case 1:
@@ -83,6 +87,7 @@ public class Application {
 	  System.out.println("****** 마지막 위치에 곡 추가 ******");
 	  System.out.print("곡 명 : ");
 	  String title = sc.nextLine();
+	  
 	  System.out.print("가수 명 : ");
 	  String artist = sc.nextLine();
 	  
