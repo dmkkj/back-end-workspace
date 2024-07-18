@@ -55,25 +55,25 @@ public class PersonController {
 		
 		Connection conn = getConnect();
 		
-//			Class.forName(ServerInfo.DRIVER_NAME);
-//			Connection conn = DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASSWORD);
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sample", "root", "qwer1234");
-			 
-			// 3. PreparedStatement - 쿼리
-			String query = "INSERT INTO person(name, age, addr) VALUES (?, ?, ?)";
-			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1, name);
-			ps.setInt(2, age);
-			ps.setString(3, addr);
-			
-			// 4. 쿼리 실행
+//		Class.forName(ServerInfo.DRIVER_NAME);
+//		Connection conn = DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASSWORD);
+//		Class.forName("com.mysql.cj.jdbc.Driver");
+//		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sample", "root", "qwer1234");
+		 
+		// 3. PreparedStatement - 쿼리
+		String query = "INSERT INTO person(name, age, addr) VALUES (?, ?, ?)";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, name);
+		ps.setInt(2, age);
+		ps.setString(3, addr);
+		
+		// 4. 쿼리 실행
 //			return ps.executeUpdate();
-			int result = ps.executeUpdate();
-			
-			closeAll(ps, conn);
-			
-			return result;
+		int result = ps.executeUpdate();
+		
+		closeAll(ps, conn);
+		
+		return result;
 	}
 	
 	// person 테이블에 데이터 수정 - UPDATE	
