@@ -1,6 +1,5 @@
 package com.kh;
 
-import java.awt.print.Book;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,7 +9,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.controller.BookController;
-import com.kh.model.Member;
+import com.kh.controller.MemberController;
+import com.kh.model.vo.Member;
+import com.kh.model.vo.Book;
+
+// 스키마 : sample
+// 테이블 : member, book, publisher, rent
 
 public class Application {
 
@@ -20,7 +24,8 @@ public class Application {
 	private Member member = new Member();
 	
 	private BookController bc = new BookController();
-
+	private MemberController mc = new MemberController();
+	
 	public static void main(String[] args) {
 
 		Application app = new Application();
@@ -82,7 +87,22 @@ public class Application {
 	}
 
 	// 1. 전체 책 조회
+	public void printBookAll() {
+		// 반복문을 이용해서 책 리스트 출력
+		for(Book book : bc.printBookAll()) {
+			String pubName = book.getPublisher().getPubName();
+			System.out.println("책 번호 : " + book.getBkNo()
+							+ "/ 제목 : " + book.getBkTitle()
+							+ "/ 저자 : " + book.getBkAuthor()
+							+ (pubName !=null ? "/ 출판사 : " + book.getPublisher().getPubName() : ""));
+		}
+		
+	}
+		
+	/*
+	// 1. 전체 책 조회
 	public ArrayList<Book> printBookAll() {
+		
 		// 반복문을 이용해서 책 리스트 출력
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -96,59 +116,35 @@ public class Application {
 			
 			while(rs.next()) {
 				Book book = new Book();
-				book.setBookNo(rs.getInt("bookNo"));
-				book.setBookTitle(rs.getString("bookTitle"));
-				book.setBookAuthor(rs.getString("bookAuthor"));
-				book.setBookPrice(rs.getString("bookPrice"));
-				book.setBookTitle(rs.getString("bookTitle"));
+				book.setBkNo(rs.getInt("bkNo"));
+				book.setBkTitle(rs.getString("bkTitle"));
+				book.setBkAuthor(rs.getString("bkAuthor"));
+				book.setBkPrice(rs.getInt("bkPrice"));
+				book.setBkPubNo(rs.getInt("bkPubNo"));
 				list.add(book);
 			}
 				closeAll(rs, ps, conn); // 자원 반납
 			
 			return list;
 			
-		}
-		
-		public ArrayList<Person> searchAllPerson() throws SQLException {
-			
-//			Connection conn = getConnect();
-//			
-//			String query = "SELECT * FROM person";
-//			PreparedStatement ps = conn.prepareStatement(query);
-//			
-//			ResultSet rs = ps.executeQuery();
-//			ArrayList<Person> list = new ArrayList<>();
-			
-			while(rs.next()) {
-				Person person = new Person(); // Setter 방식으로 할 때 항상 주의할 점은 Person 객체를 만들어줘야 함
-				person.setId(rs.getInt("id"));
-				person.setName(rs.getString("name"));
-				person.setAge(rs.getInt("age"));
-				person.setAddr(rs.getString("addr"));
-				list.add(person);
-			}
-			
-			closeAll(rs, ps, conn); // 자원 반납
-			
-			return list;
-
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return null;
 	}
-
+	*/
+	
 	// 2. 책 등록
 	public void registerBook() {
 		// 책 제목, 책 저자를 사용자한테 입력 받아
-		System.out.println("책 제목 : ");
+		System.out.print("책 제목 : ");
 		String title = sc.nextLine();
-	
-		System.out.println("책 저자 : ");
-		String author = sc.nextLine();
-
+		System.out.print("책 저자 : ");
+		String author = sc.nextLine(); 
+        
 		// 기존 제목, 저자 있으면 등록 안 되게!
-		if() {
+		if (bc.registerBook(title, author)) {
 			// 등록에 성공하면 "성공적으로 책을 등록했습니다." 출력
 			System.out.println("성공적으로 책을 등록했습니다.");
 		} else {
@@ -161,27 +157,57 @@ public class Application {
 	// 3. 책 삭제
 	public void sellBook() {
 		// printBookAll로 전체 책 조회를 한 후
+		printBookAll();
+				
 		// 삭제할 책 번호 선택을 사용자한테 입력 받아
-		// 삭제에 성공하면 "성공적으로 책을 삭제했습니다." 출력
-		System.out.println("성공적으로 책을 삭제했습니다.");
-		// 실패하면 "책을 삭제하는데 실패했습니다." 출력
-		System.out.println("책을 삭제하는데 실패했습니다.");
+		System.out.println("삭제할 책 번호 : ");
+		int no = Integer.parseInt(sc.nextLine());
+		
+		if(bc.sellBook(no)) {
+			// 삭제에 성공하면 "성공적으로 책을 삭제했습니다." 출력
+			System.out.println("성공적으로 책을 삭제했습니다.");
+		} else {
+			// 실패하면 "책을 삭제하는데 실패했습니다." 출력
+			System.out.println("책을 삭제하는데 실패했습니다.");
+		}
 	}
 
 	// 4. 회원가입
 	public void registerMember() {
 		// 아이디, 비밀번호, 이름을 사용자한테 입력 받아
-		// 회원가입에 성공하면 "성공적으로 회원가입을 완료하였습니다." 출력
-		System.out.println("성공적으로 회원가입을 완료하였습니다.");
-		// 실패하면 "회원가입에 실패했습니다." 출력
-		System.out.println("회원가입에 실패했습니다.");
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String password = sc.nextLine();
+		System.out.print("이름 : ");
+		String name = sc.nextLine();
+		
+		if(mc.registerMember(id, password, name)) {
+			// 회원가입에 성공하면 "성공적으로 회원가입을 완료하였습니다." 출력
+			System.out.println("성공적으로 회원가입을 완료하였습니다.");
+		} else {
+			// 실패하면 "회원가입에 실패했습니다." 출력
+			System.out.println("회원가입에 실패했습니다.");
+		}
+	
 	}
 
 	// 5. 로그인
 	public void login() {
 		// 아이디, 비밀번호를 사용자한테 입력 받아 
-		// 로그인에 성공하면 "~~님, 환영합니다!" 출력 후 memberMenu() 호출
-		// 로그인에 성공하면 "~~님, 환영합니다!" 출력 후
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String password = sc.nextLine();
+		member = mc.login(id, password);
+		if(member!=null) {
+			// 로그인에 성공하면 "~~님, 환영합니다!" 출력 후 memberMenu() 호출
+			System.out.println(member.getMemberName() + "님, 환영합니다!");
+			memberMenu();
+		} else {
+			// 실패하면 "로그인에 실패했습니다." 출력
+			System.out.println("로그인에 실패했습니다.");
+		}
 	}
 
 	public void memberMenu() {
@@ -216,10 +242,14 @@ public class Application {
 
 	// 1. 책 대여
 	public void rentBook() {
+		// 같은 책을 여러 사용자가 대여할 수 있는지? 책이 1권이라고 가정!
+		// 다른 사람은 대여 못하게! 본인 뿐만 아니라 다른 사람도 대여 못하게!
+		// 기존 정보 삭제 후에 진행할게요!
 		// printBookAll 메서드 호출하여 전체 책 조회 출력 후
 		// 대여할 책 번호 선택을 사용자한테 입력 받아
+		// 이미 대여된 책은 대여 불가!
 		// 대여에 성공하면 "성공적으로 책을 대여했습니다." 출력
-		// 대여에 성공하면 "성공적으로 책을 대여했습니다." 출력
+		
 	}
 
 	// 2. 내가 대여한 책 조회
