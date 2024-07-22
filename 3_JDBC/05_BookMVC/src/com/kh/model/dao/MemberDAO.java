@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import com.kh.model.vo.Member;
 
 public class MemberDAO {
-
+	
 	public MemberDAO() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -47,6 +47,7 @@ public class MemberDAO {
 	// 5. 로그인
 	public Member login(String id, String password) throws SQLException {
 		Connection conn = connect();
+		
 		String query = "SELECT * FROM member WHERE member_id = ? AND member_pwd = ?";
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.setString(1, id);
@@ -66,4 +67,16 @@ public class MemberDAO {
 		
 		return member; // member 담기
 	}
+	
+	// 5. 회원탈퇴
+	public int deleteMember(int memberNo) throws SQLException {
+		Connection conn = connect();
+		String query = "DELETE FROM member WHERE member_no = ?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setInt(1, memberNo);
+		int result = ps.executeUpdate();
+		close(ps,conn);
+		return result;
+	}
+	
 }
