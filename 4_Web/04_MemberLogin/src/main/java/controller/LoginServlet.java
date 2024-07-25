@@ -10,6 +10,7 @@ import model.dao.MemberDAO;
 import model.vo.Member;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -20,15 +21,19 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
-		Member member = new Member(id, password, "");
-		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("info", member);
-		
-		System.out.println("good");
-		
-		response.sendRedirect("index.jsp");
+		MemberDAO dao = new MemberDAO();
+		try {
+			Member member = dao.login(id, password);
+			
+			// 바인딩 - Session
+			HttpSession session = request.getSession();
+			session.setAttribute("member", member);
+			
+			response.sendRedirect("/index.jsp");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

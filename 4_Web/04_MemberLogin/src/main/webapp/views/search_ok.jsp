@@ -5,20 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 검색 결과</title>
 </head>
 <body>
-	<% Member member = (Member) request.getAttribute("info");
-	if(member!=null) {
-	%>
-	<h1>회원 정보 결과</h1>
+	<h1>회원 검색 결과</h1>
+	<% Member member = (Member) request.getAttribute("member"); %>
 	<ul>
 		<li>아이디 : <%=member.getId() %></li>
 		<li>비밀번호 : <%=member.getPassword() %></li>
 		<li>이름 : <%=member.getName() %></li>
 	</ul>
-	<% } else { %>
-	<h1>회원 정보가 없습니다 ㅜㅜ</h1>
-	<% } %>
+	<a href="/">메인 페이지로 이동</a>
 </body>
 </html>
