@@ -1,5 +1,7 @@
 package com.kh.mybatis.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,20 @@ public class MemberService {
 		mapper.register(member);	// MemberMapper.java와 member.xml에서 1:1 매핑한 member 값을 여기에서 불러옴
 	}
 	
+	public List<Member> allMember() {
+		return mapper.allMember();
+	}
+	
+	public Member login(Member member) { // MemberController.java로 이동
+		return mapper.login(member);
+	} 
+	
+	public void update(Member member) {
+		mapper.update(member);
+	}
+	
+//	public void updatePwd(Member member) {
+//		mapper.updatePwd(member);
+//	}
 	
 }
