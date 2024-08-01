@@ -114,8 +114,7 @@ public class MemberController {
 	
 	@PostMapping("/delete")
 	public String delete(@RequestParam(name="idList", required=false) List<String> idList) {
-		System.out.println(idList);
-		//service.delete(idList);
+		if(idList!=null) service.delete(idList);
 		return "redirect:/";
 	}
 	

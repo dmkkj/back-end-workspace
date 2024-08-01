@@ -1,3 +1,10 @@
+DROP TABLE comment;
+DROP TABLE video_like;
+DROP TABLE video;
+DROP TABLE subscribe;
+DROP TABLE channel;
+DROP TABLE member;
+
 -- 회원
 CREATE TABLE member(
 	id VARCHAR(20) PRIMARY KEY,
@@ -21,7 +28,7 @@ CREATE TABLE video(
     video_url VARCHAR(100),
     video_img VARCHAR(100),
     video_title VARCHAR(80),
-    video_count INT,
+    video_count INT DEFAULT 0,
     video_date DATE DEFAULT (current_date),
     video_desc TEXT,
     channel_code INT,
@@ -57,3 +64,26 @@ CREATE TABLE video_like(
     FOREIGN KEY (id) REFERENCES member (id),
     FOREIGN KEY (video_code) REFERENCES video(video_code)
 );
+
+-- member 회원 추가
+INSERT INTO member(id, password, email, phone)
+VALUES('akmu', '1234', 'akmu@gmail.com', '010-0000-0000');
+
+SELECT * FROM member;
+
+INSERT INTO channel(channel_img, channel_name, id)
+VALUES ('http://192.168.10.51:8082/channel/akmu.jpg', 'AKMU', 'akmu');
+
+SELECT * FROM channel;
+
+INSERT INTO video(video_url, video_img, video_title, video_desc, channel_code)
+VALUES ('http://localhost:8082/video/AKMU1.mp4',
+	'http://localhost:8082/thumbnail/akmu.webp',
+	'AKMU - 후라이의 꿈 LIVE CLIP (FESTIVAL ver.)',
+    'More about AKMU',
+    1);
+
+DELETE FROM video WHERE video_code = 1;
+
+SELECT * FROM video;
+
