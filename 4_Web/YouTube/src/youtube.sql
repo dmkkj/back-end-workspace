@@ -76,14 +76,20 @@ VALUES ('http://192.168.10.51:8082/channel/akmu.jpg', 'AKMU', 'akmu');
 
 SELECT * FROM channel;
 
+
 INSERT INTO video(video_url, video_img, video_title, video_desc, channel_code)
-VALUES ('http://localhost:8082/video/AKMU1.mp4',
-	'http://localhost:8082/thumbnail/akmu.webp',
+VALUES ('http://192.168.10.51:8082/video/AKMU1.mp4',
+	'http://192.168.10.51:8082/thumbnail/akmu.webp',
 	'AKMU - 후라이의 꿈 LIVE CLIP (FESTIVAL ver.)',
     'More about AKMU',
     1);
+    
+SELECT * FROM video
+JOIN channel USING (channel_code);
+
 
 DELETE FROM video WHERE video_code = 1;
 
 SELECT * FROM video;
+
 
