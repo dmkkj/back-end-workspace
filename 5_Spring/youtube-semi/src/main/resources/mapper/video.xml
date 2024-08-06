@@ -22,5 +22,12 @@
 		SELECT * FROM video
 		JOIN channel USING (channel_code)
 	</select>
+	
+	<!-- 받아오는(parameterType) 비디오 코드의 정보 #{videoCode} -> 숫자 받아오기 때문에 Integer -->
+	<select id="detail" parameterType="Integer" resultMap="videoMap">
+		SELECT * FROM video
+		JOIN channel USING (channel_code)
+		WHERE video_code = #{videoCode}
+	</select>
 
 </mapper>

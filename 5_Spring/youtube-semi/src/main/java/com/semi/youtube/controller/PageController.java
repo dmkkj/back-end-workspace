@@ -23,8 +23,9 @@ public class PageController {
 	
 	// http://localhost:8080/watch?v=2
 	@GetMapping("/{videoCode}")
-	public String detail(@PathVariable("videoCode") String videoCode) {
-		System.out.println(videoCode);
+	public String detail(@PathVariable("videoCode") int videoCode, Model model) {
+		model.addAttribute("video", video.detail(videoCode));
+		model.addAttribute("list", video.allVideo());
 		return "detail";
 	}
 

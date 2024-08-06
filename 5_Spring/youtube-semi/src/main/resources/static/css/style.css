@@ -5,6 +5,7 @@ header {
   display: flex;
   justify-content: space-between;
   height: 60px;
+  z-index: 1;
 }
 .header-start {
   display: flex;
@@ -69,7 +70,8 @@ main nav {
   display: flex;
   padding-left: 15px;
   align-items: center;
-  background:white;
+  background: white;
+  z-index: 1;
 }
 main nav a {
   background-color: #eee;
@@ -123,17 +125,22 @@ main section {
 }
 
 /* section - video */
+section {
+	display: flex;
+}
 .video-card {
   width: 350px;
   border-radius: 10px;
   cursor: pointer;
+  margin: 5px;
 }
 .video-card:hover .video-main video {
- display: block; 
+  display: block;
 }
 .video-card:hover .video-main img {
   display: none;
- }
+}
+
 .video-main {
   position: relative;
 }
@@ -166,4 +173,3 @@ main section {
   font-size: 0.9rem;
   color: #555;
 }
-
