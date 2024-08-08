@@ -1,0 +1,10 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper 패키지 안에 있는 MemberMapper(.java) -->
+<mapper namespace="mapper.MemberMapper">
+	<!-- id는 받아온 값이 필요하므로 parameterType 있어야 함 -->
+	<select id="idCheck" parameterType="String" resultType="Member"> <!-- Member.java 만들고 resultType="Member" -->
+		SELECT * FROM member WHERE id = #{id}
+	</select>
+	<!-- member.xml 작성 후 MemberMapper.java로 이동 -->
+	<!-- Member.java 만들기 -->
+</mapper>
