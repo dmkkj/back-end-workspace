@@ -17,4 +17,11 @@ public class MemberService {
 		return mapper.idCheck(id);
 	}
 	
+//	public Member btn(String id, String password, String name) {
+//		return mapper.btn(id, password, name);
+//	}
+
+	public void register(Member vo) {
+		mapper.register(vo);
+	}
 }

@@ -31,7 +31,7 @@
 				
 				// 응답
 				success: function(result) {
-					alert(result)
+					// alert(result)
 					if(result) {
 						$("#idCheckView").text("ID 사용 가능");
 					} else {

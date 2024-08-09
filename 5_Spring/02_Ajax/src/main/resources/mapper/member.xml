@@ -1,4 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- back단은 member.xml 여기부터 작성 -->
 <!-- mapper 패키지 안에 있는 MemberMapper(.java) -->
 <mapper namespace="mapper.MemberMapper">
 	<!-- id는 받아온 값이 필요하므로 parameterType 있어야 함 -->
@@ -7,4 +8,9 @@
 	</select>
 	<!-- member.xml 작성 후 MemberMapper.java로 이동 -->
 	<!-- Member.java 만들기 -->
+	
+	<insert id="register" parameterType="Member">
+		INSERT INTO member
+		VALUES(#{id}, #{password}, #{name})
+	</insert>
 </mapper>

@@ -46,4 +46,17 @@ public class AjaxController {
 		}
 	}
 	
+	@ResponseBody
+	@PostMapping("/serial")
+	public Member serial(Member member) {
+//	public void serial(String id, String password, String name) {
+//		Member member = service.btn(input); // DTO 만들고 싶다..
+//		System.out.println(input);
+//		return input;
+		System.out.println(member);
+		service.register(member);
+		return member;
+//		service.register(new Member(id, password, name));
+	}
 }
+
