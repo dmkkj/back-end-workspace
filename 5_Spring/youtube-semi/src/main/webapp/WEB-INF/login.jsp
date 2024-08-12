@@ -13,18 +13,20 @@
 <body>
 	<div class="container"> <!-- 화면에 꽉 채우기 : <div class="container-fluid"> -->
 		<h1>로그인</h1>
-		<form action="/login" method="post" onsubmit="return validate()">
+		<!-- /login에서 요청을 보내면 받아서 처리할 controller 필요 -->
+		<form action="/login" method="post">
 		  <div class="mb-3">
 		    <label for="id" class="form-label">아이디</label>
-		    <input type="text" class="form-control" id="id">
+		    <!-- 내가 보내고자 하는 key 필요함. name 속성 -->
+		    <input type="text" class="form-control" id="id" name="id">
 		    <div id="idCheck" class="form-text"></div>
 		  </div>
 		  <div class="mb-3">
 		    <label for="password" class="form-label">비밀번호</label>
-		    <input type="password" class="form-control" id="password">
+		    <input type="password" class="form-control" id="password" name="password">
 		    <div id="pwdCheck" class="form-text"></div>
 		  </div>
-	 	 <button type="submit" class="btn btn-dark">로그인</button>
+	 	 <button type="submit" class="btn btn-dark" id="login">로그인</button>
 		  <!-- checkbox 필요 없어서 지움
 		  <div class="mb-3 form-check">
 		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -33,6 +35,5 @@
 		  -->
 	</form>
 	</div>
-	<script src="${pageContext.request.contextPath}/js/login.js"></script>
 </body>
 </html>

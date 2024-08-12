@@ -18,4 +18,8 @@ public class MemberService {
 		if(vo!=null) return true;
 		return false;
 	}
+	
+	public Member login(Member vo) {
+		return member.login(vo);
+	}
 }
