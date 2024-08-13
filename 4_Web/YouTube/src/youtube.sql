@@ -105,4 +105,4 @@ SELECT * FROM video WHERE video_code = 2;
 
 SELECT * FROM youtube.subscribe;
 SELECT * FROM youtube.member;
-
+SELECT * FROM youtube.video_like;
