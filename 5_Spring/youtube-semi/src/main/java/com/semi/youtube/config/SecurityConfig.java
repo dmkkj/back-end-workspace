@@ -1,4 +1,4 @@
-package com.kh.security.config;
+package com.semi.youtube.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 	
 	@Autowired
-	private JwtAuthenticationFilter jwtFilter;
+	private JwtFilter jwtFilter;
 	
 	// 특정 http 요청에 대한 웹 기반 보안 구성. 인증/인가 및 로그아웃 설정
 	@Bean
@@ -25,20 +25,11 @@ public class SecurityConfig {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize ->
 					authorize
-						// .requestMatchers("/register").authenticated()
-						.requestMatchers("/member").authenticated() // /member 요청이 들어왔을 때 인증된 사람만
-						.requestMatchers("/admin").hasRole("ADMIN") // 권한이 ROLE_ADMIN인 경우만 들어올 수 있음 (.hasRole()하면 ROLE.ADMIN으로 알아서 인식해서 ROLE 생략 가능)
+						.requestMatchers("/like", "/unlike").authenticated() // 인증된 사람만 쓸 수 있게
 						.anyRequest().permitAll()
 				)
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
-		
-//				.formLogin(login ->
-//						login
-//							.loginPage("/login")
-//							.defaultSuccessUrl("/", true)
-//							.permitAll()
-//				)
 
 	}
 	

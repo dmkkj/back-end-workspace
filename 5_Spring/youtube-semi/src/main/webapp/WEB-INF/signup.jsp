@@ -11,13 +11,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 </head>
 <body>
-	<div class="container"> <!-- 화면에 꽉 채우기 : <div class="container-fluid"> -->
-		<h1>로그인</h1>
-			<!-- /login에서 요청을 보내면 받아서 처리할 controller 필요 -->
-			<form action="/login" method="post">
+	<div class="container">
+		<h1>회원가입</h1>
+			<form action="/signup" method="post" onsubmit="return validate()">
 			  <div class="mb-3">
 			    <label for="id" class="form-label">아이디</label>
-			    <!-- 내가 보내고자 하는 key 필요함. name 속성 -->
 			    <input type="text" class="form-control" id="id" name="id">
 			    <div id="idCheck" class="form-text"></div>
 			  </div>
@@ -26,15 +24,19 @@
 			    <input type="password" class="form-control" id="password" name="password">
 			    <div id="pwdCheck" class="form-text"></div>
 			  </div>
-		 	 <button type="submit" class="btn btn-dark" id="login">로그인</button>
-			  <!-- checkbox 필요 없어서 지움
-			  <div class="mb-3 form-check">
-			    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-			    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+			  <div class="mb-3">
+			    <label for="email" class="form-label">이메일</label>
+			    <input type="text" class="form-control" id="email" name="email">
+			    <div id="emailCheck" class="form-text"></div>
 			  </div>
-			  -->
+			  <div class="mb-3">
+			    <label for="phone" class="form-label">전화번호</label>
+			    <input type="text" class="form-control" id="phone" name="phone">
+			    <div id="phoneCheck" class="form-text"></div>
+			  </div>
+			  <button type="submit" class="btn btn-dark">회원가입</button>
 		</form>
-		<a href="/signup">아직 회원이 아니신가요?</a>
 	</div>
+	<script src="${pageContext.request.contextPath}/js/signup.js"></script>
 </body>
 </html>
