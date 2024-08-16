@@ -18,7 +18,7 @@
 			  <div class="mb-3">
 			    <label for="id" class="form-label">아이디</label>
 			    <!-- 내가 보내고자 하는 key 필요함. name 속성 -->
-			    <input type="text" class="form-control" id="id" name="id">
+			    <input type="text" class="form-control" id="id" name="username">
 			    <div id="idCheck" class="form-text"></div>
 			  </div>
 			  <div class="mb-3">
