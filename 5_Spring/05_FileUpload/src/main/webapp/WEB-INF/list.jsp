@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,12 +32,15 @@
 			</thead>
 			<tbody>
 				<!-- 리스트 가져다가 뿌려주세요! -->
-				<c:forEach var="board" items="${boards}">
+				<c:forEach var="board" items="${list}" varStatus="status">
 					<tr>
-						<td>${board.no}</td>
-						<td>${board.title}</td>
+						<td>${status.count}</td>
+						<td><a href="/view?no=${board.no}">${board.title}</a></td>
 						<td>${board.content}</td>
-						<td>${board.date}</td>
+						<!-- <td>${board.formatDate}</td> -->
+						<td>
+							<fmt:formatDate value="${board.formatDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

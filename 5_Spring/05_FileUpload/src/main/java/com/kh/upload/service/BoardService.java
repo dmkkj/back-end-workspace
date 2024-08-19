@@ -1,14 +1,12 @@
 package com.kh.upload.service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.upload.model.vo.Board;
+import com.kh.upload.model.vo.Paging;
 
 import mapper.BoardMapper;
 
@@ -17,27 +15,57 @@ public class BoardService {
 
 	@Autowired
 	private BoardMapper mapper;
+	
+	public void insert(Board vo) {
+		mapper.insert(vo);
+	}
 
-	public void register(Board board) {
+	public List<Board> selectAll(Paging paging) {
 		
-		if(board.getFile() != null && board.getFile().isEmpty()) {
+		/* 페이징 처리
+		 * 
+		 * limit가 10인 경우
+		 * page = 1 -> offset = 0
+		 * page = 2 -> offset = 10
+		 * page = 3 -> offset = 20 ...
+		 * 
+		 * offset = limit * (page - 1)
+		 * */
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
+		
+		return mapper.selectAll(paging);
+	}
+
+	public Board select(int no) {
+		return mapper.select(no);
+	}
+	
+	public void update(Board vo) {
+		mapper.update(vo);
+	}
+	
+	public void delete(int no) {
+		mapper.delete(no);
+	}
+	
+	/*
+	public void insert(Board vo) {
+		
+		if(vo.getFile() != null && vo.getFile().isEmpty()) {
 			UUID uuid = UUID.randomUUID();
-			String fileName = uuid.toString() + "_" + board.getFile().getOriginalFilename();
+			String fileName = uuid.toString() + "_" + vo.getFile().getOriginalFilename();
 		
 			File file = new File("D:\\upload\\" + fileName);
 		
 			try {
-				board.getFile().transferTo(file);
-				board.setUrl(fileName);
+				vo.getFile().transferTo(file);
+				vo.setUrl(fileName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		mapper.register(board);
+		mapper.insert(vo);
 	}
-	
-	public List<Board> allBoard() {
-		return mapper.allBoard();
-	}
-	
+	*/
+
 }
