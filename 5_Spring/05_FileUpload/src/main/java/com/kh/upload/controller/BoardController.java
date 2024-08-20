@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.upload.model.vo.Board;
+import com.kh.upload.model.vo.Paging;
 import com.kh.upload.service.BoardService;
 
 @Controller
@@ -90,8 +91,9 @@ public class BoardController {
 	*/
 	
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<Board> list = service.selectAll(); // DB에서 게시글 리스트 가져오기
+	public String list(Model model, Paging paging) {
+		
+		List<Board> list = service.selectAll(paging); // DB에서 게시글 리스트 가져오기
 //		model.addAttribute("boards", boards); // 모델에 데이터 추가
 		
 		for(Board b : list) {
@@ -101,6 +103,8 @@ public class BoardController {
 		}
 		
 		model.addAttribute("list", list);
+		model.addAttribute("paging", new Paging(paging.getPage(), service.total()));
+		
 		return "list";
 	}
 	

@@ -35,7 +35,11 @@ public class BoardService {
 		
 		return mapper.selectAll(paging);
 	}
-
+	
+	public int total() {
+	    return mapper.total();
+	}
+	
 	public Board select(int no) {
 		return mapper.select(no);
 	}
@@ -47,25 +51,5 @@ public class BoardService {
 	public void delete(int no) {
 		mapper.delete(no);
 	}
-	
-	/*
-	public void insert(Board vo) {
-		
-		if(vo.getFile() != null && vo.getFile().isEmpty()) {
-			UUID uuid = UUID.randomUUID();
-			String fileName = uuid.toString() + "_" + vo.getFile().getOriginalFilename();
-		
-			File file = new File("D:\\upload\\" + fileName);
-		
-			try {
-				vo.getFile().transferTo(file);
-				vo.setUrl(fileName);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		mapper.insert(vo);
-	}
-	*/
 
 }

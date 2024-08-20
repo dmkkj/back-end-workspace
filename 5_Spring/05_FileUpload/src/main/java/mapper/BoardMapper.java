@@ -15,7 +15,8 @@ public interface BoardMapper {
 	Board select(int no);
 	void update(Board vo);
 	void delete(int no);
-
+	int total();
+	
 	// 리턴타입 resultType이 있는지(없을 때는 void), id 메서드, 파라미터타입 있는가
 	// <select id="select" parameterType="int" resultType="Board">
 	// <update id="update" parameterType="Board">

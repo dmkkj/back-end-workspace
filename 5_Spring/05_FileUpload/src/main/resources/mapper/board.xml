@@ -11,6 +11,10 @@
 	</select>
 	<!-- Mapper.java 해당 Mapper에 mapping 해놓기 -->
 	
+	<select id="total" resultType="int">
+		SELECT count(*) FROM board
+	</select>
+	
 	<select id="select" parameterType="int" resultType="Board">
 		SELECT * FROM board
 		WHERE no = #{no}
@@ -27,4 +31,5 @@
 		DELETE FROM board
 		WHERE no = #{no}
 	</delete>
+	
 </mapper>

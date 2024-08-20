@@ -18,9 +18,10 @@
 		</association>
 	</resultMap>
 	
-	<select id="allVideo" resultMap="videoMap">
+	<select id="allVideo" parameterType="Paging" resultMap="videoMap">
 		SELECT * FROM video
 		JOIN channel USING (channel_code)
+		LIMIT #{offset}, #{limit}
 	</select>
 	
 	<!-- 받아오는(parameterType) 비디오 코드의 정보 #{videoCode} -> 숫자 받아오기 때문에 Integer -->

@@ -34,7 +34,8 @@
 				<!-- 리스트 가져다가 뿌려주세요! -->
 				<c:forEach var="board" items="${list}" varStatus="status">
 					<tr>
-						<td>${status.count}</td>
+						<!-- <td>${status.count}</td> -->
+						<td>${board.no}</td>
 						<td><a href="/view?no=${board.no}">${board.title}</a></td>
 						<td>${board.content}</td>
 						<!-- <td>${board.formatDate}</td> -->
@@ -45,6 +46,19 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<ul class="pagination">
+			<li class="page-item ${paging.prev ? '' : 'disabled'}">
+				<a class="page-link" href="/list?page=${paging.startPage - 1}">Previous</a>
+			</li>
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+			<li class="page-item">
+				<a class="page-link ${paging.page == page ? 'active' : ''}" href="/list?page=${page}">${page}</a>
+			</li>
+			</c:forEach>
+			<li class="page-item ${paging.next ? '' : 'disabled'}">
+				<a class="page-link" href="/list?page=${paging.endPage + 1}">Next</a>
+			</li>
+		</ul>
 	</div>
 </body>
 </html>
